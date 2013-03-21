@@ -24,13 +24,14 @@ foreach ($files as $file) {
     if (file_exists($file)) {
         require $file;
 
+	define('PHING_HOME', dirname($file) . '/scrum-albatros/phing/');
         define('PHING_COMPOSER_INSTALL', $file);
 
         break;
     }
 }
 
-putenv("PHING_HOME=" . realpath(dirname(__FILE__) . '/../'));
+putenv("PHING_HOME=" . PHING_HOME);
 
 if (!defined('PHING_COMPOSER_INSTALL')) {
     die(
@@ -40,4 +41,4 @@ if (!defined('PHING_COMPOSER_INSTALL')) {
     );
 }
 
-require_once dirname(__FILE__) . '/phing.php';
+require_once PHING_HOME . '/bin/phing.php';
